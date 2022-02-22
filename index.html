@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Котики</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<body id="htmlbody">
+
+    <header class="logo">
+        <img class="header__logo" src='img/kot.jpg' width="80" height="80">
+        <span class="heder_title">Бабуленькины котики</span>
+    </header>
+
+
+    <section class="cards" id = "allcats">
+          <template id="card-template">
+            <div class="cat__card">
+              <div class="cat__img">
+              </div>
+              <h3></h3>
+              <p class="cat__rate"></p>
+            </div>
+          </template>
+    </section>
+
+    <div class="modal" aria-disabled="true" >
+      <div class="modal__wrap">
+          <div class="modal__window" role="dialog" aria-modal="true" >
+              <div class="modal__close" id="closeimg"></div>
+              <div class="modal__window_content">
+               <div class="modal__window_img">
+               </div>
+               <div class="modal__window_text">
+                 <h1></h1>
+                 <h2></h2>
+                  <p></p>
+                </div>
+              </div>
+          </div>
+      </div>
+    </div>
+
+    <script src="js/modalwindow.js"></script>
+    <script src="js/createcard.js"></script>
+</body>
+<div class="footer__">
+    <p>©2022 All rights reserved</p>
+</div>
+
+</html>
