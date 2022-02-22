@@ -56,25 +56,23 @@ div.cat__card:hover>.cat__img {
  .cat__rate {
     display: flex;
      justify-content: space-between;
-     padding: 0px 15px;
+     padding: 0 15px;
      
   }
   h3 {
       font-size: 25px;
-      margin: 0px;
+      margin: 0;
   }
-  .cards {
-      display: grid;
-      grid-template-columns: 300px 300px 300px ;
-      grid-template-rows: auto;
-      gap: 50px;
+ .cards {
+     display: grid;
+     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+     grid-template-rows: auto;
+     gap: 50px;
      justify-content: center;
      box-shadow: 0 0 5px 0 #878a87;
-    margin-left: -10px;
-    margin-right: -10px;
-    padding-top: 50px;
-    padding-bottom: 50px;
-               }
+     padding: 50px;
+ }
+
 .footer__ {
     height: 50px;
     align-items: center;
@@ -104,7 +102,7 @@ padding: 30px 10px;
 }
 
 .modal{
-    display: none;
+    display: block;
     position: fixed;
     left: 0;
     top: 0;
@@ -112,7 +110,9 @@ padding: 30px 10px;
     width: 100%;
     height: 100%; 
     overflow: auto;
-    background-color: rgba(0,0,0,0.4);  
+    background-color: rgba(0,0,0,0.4);
+    opacity: 0;
+    visibility: hidden;
   }
 
 .modal__wrap{
@@ -166,4 +166,9 @@ padding: 30px 10px;
     background-repeat: no-repeat;
     width: 50px;
     height: 50px;
+}
+
+.modal_opened {
+    visibility: visible;
+    opacity: 1;
 }
