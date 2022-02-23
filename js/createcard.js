@@ -50,7 +50,10 @@ function getAllCatsPromise() {
     const url = 'https://sb-cats.herokuapp.com/api/show';
     fetch(url)
         .then(response =>  response.json() )
-        .then(data => createCatCards(data.data) )
+        .then(data => {
+            localStorage.setItem('catsData', JSON.stringify(data.data));
+            createCatCards(data.data)
+        } )
         .catch(error => console.log(error));
 }
 
