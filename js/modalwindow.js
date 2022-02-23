@@ -3,11 +3,13 @@ const modalWrap = document.querySelector(".modal__wrap");
 
 function openModal(modal) {
     modal.classList.add('modal_opened');
+    document.body.classList.add('scroll_disabled')
 }
 
 function closeModal() {
     const modalActive = document.querySelector('.modal_opened');
-    modalActive.classList.remove('modal_opened');
+    modalActive && modalActive.classList.remove('modal_opened');
+    document.body.classList.remove('scroll_disabled')
 }
 
 async function showCatCard(event) {
@@ -44,6 +46,8 @@ async function getCatById(catId) {
 }
 
 function createCatDetail(catData) {
+    const deleteImage = modal.querySelector("#deleteimg");
+    const editImage = modal.querySelector("#editimg");
     const modalH1 = modal.querySelector("h1");
     modalH1.textContent = catData.name;
     const modalH2 = modal.querySelector("h2");
@@ -52,14 +56,20 @@ function createCatDetail(catData) {
     modalP.textContent = catData.description;
     const modalImg = modal.querySelector(".modal__window_img");
     modalImg.style.backgroundImage = `url("${catData.img_link}"), url('img/noimage.png')`;
-    htmlbody.style.overflow = 'hidden';
-//    modal.style.display = "block";
+
+    deleteImage.addEventListener("click", deleteHandler);
+    editImage.addEventListener("click", editHandler);
+    
+    function editHandler() {
+        console.log(`edit cat ${catData.id}`)
+    }
+    function deleteHandler() {
+        console.log(`delete cat ${catData.id}`)
+    }
 }
 
 window.onclick = function (event) {
     if (event.target === modalWrap || event.target === closeimg) {
-//        modal.style.display = "none";
         closeModal();
-        htmlbody.style.overflow = 'scroll';
     }
 }

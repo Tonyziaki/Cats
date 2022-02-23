@@ -1,7 +1,33 @@
 
 
-.heder_title {
-    font-size: 20px;     
+.header_title {
+    font-size: 20px;
+}
+
+.header__user-name{
+    text-align: center;
+    height: 20px;
+}
+
+.header__cover{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.header-noname {
+    background-image: url("img/nouser.png");
+    background-position: center;
+    background-size: cover;
+    height: 100px;
+}
+
+.header-username {
+    background-image: url("img/cat_logo_default1.png");
+    background-position: center;
+    background-size: cover;
+    height: 60px;
+    width: 60px;
 }
 
 header {
@@ -12,7 +38,7 @@ header {
 
 .logo {
     display: flex;
-    padding: 10px calc(50% - 500px);    
+    padding: 10px 50px;
 }
 
 .header__logo{
@@ -87,6 +113,7 @@ div.cat__card:hover>.cat__img {
     background: rgba(238, 235, 235, 0.8);
     margin: 300px auto;
 }
+
 .popup__body {
 min-height: 100%;
 display: flex;
@@ -168,7 +195,57 @@ padding: 30px 10px;
     height: 50px;
 }
 
+.modal__edit{
+    position: absolute;
+    top:10px;
+    right: 70px;
+    cursor: pointer;
+    background-image: url(img/edit.png);
+    background-position: center 0;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 50px;
+    height: 50px;
+}
+
+.modal__delete{
+    position: absolute;
+    top:10px;
+    right: 130px;
+    cursor: pointer;
+    background-image: url(img/delete.png);
+    background-position: center 0;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 50px;
+    height: 50px;
+}
+
 .modal_opened {
+    visibility: visible;
+    opacity: 1;
+}
+
+.scroll_disabled {
+    overflow: hidden;
+}
+
+.modal__edit{
+    visibility: hidden;
+    opacity: 0;
+}
+
+.modal__delete {
+    visibility: hidden;
+    opacity: 0;
+}
+
+.enableEdit {
+    visibility: visible;
+    opacity: 1;
+}
+
+.enableDelete {
     visibility: visible;
     opacity: 1;
 }

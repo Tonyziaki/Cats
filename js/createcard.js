@@ -1,15 +1,15 @@
 const catImage = document.querySelector(".cat__img");
 const logo = document.querySelector(".header__logo");
 
-function handler(event) {
-    localStorage.clear();
-    window.location.reload();
-}
-
 if (+localStorage.getItem('catsData') === 0) {
     getAllCatsPromise();
 } else {
     createCatCards(JSON.parse(localStorage.getItem('catsData')));
+}
+
+function handler(event) {
+    localStorage.clear();
+    window.location.reload();
 }
 
 function addRate (element) {
@@ -36,7 +36,7 @@ function getAllCats() {
     xhr.open('GET', 'https://sb-cats.herokuapp.com/api/show', true);
     xhr.send();
     xhr.onload = function() {
-        if (xhr.status != 200) {
+        if (xhr.status !== 200) {
             console.log(`Ошибка ${xhr.status}: ${xhr.statusText}`);
         } else { 
             const catData = JSON.parse(xhr.response).data;

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 
 <head>
     <meta charset="UTF-8">
@@ -13,7 +13,12 @@
 
     <header class="logo">
         <img class="header__logo" src='img/kot.jpg' width="80" height="80">
-        <span class="heder_title">Бабуленькины котики</span>
+        <span class="header_title">Бабуленькины котики</span>
+        <div class="header__cover">
+            <div class="header__user">
+            </div>
+            <p class="header__user-name"></p>
+        </div>
     </header>
 
 
@@ -23,7 +28,7 @@
               <div class="cat__img">
               </div>
               <h3></h3>
-              <p class="cat__rate"></p>
+              <span class="cat__rate"></span>
             </div>
           </template>
     </section>
@@ -31,6 +36,8 @@
     <div class="modal" aria-disabled="true" >
       <div class="modal__wrap">
           <div class="modal__window" role="dialog" aria-modal="true" >
+              <div class="modal__delete" id="deleteimg"></div>
+              <div class="modal__edit" id="editimg"></div>
               <div class="modal__close" id="closeimg"></div>
               <div class="modal__window_content">
                <div class="modal__window_img">
@@ -44,9 +51,11 @@
           </div>
       </div>
     </div>
-
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
     <script src="js/modalwindow.js"></script>
     <script src="js/createcard.js"></script>
+    <script src="js/auth.js"></script>
+
 </body>
 <div class="footer__">
     <p>©2022 All rights reserved</p>
