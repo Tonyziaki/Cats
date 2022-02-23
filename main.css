@@ -1,15 +1,14 @@
 
-
 .header_title {
     font-size: 20px;
 }
 
-.header__user-name{
+.header__user-name {
     text-align: center;
     height: 20px;
 }
 
-.header__cover{
+.header__cover {
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -32,8 +31,8 @@
 
 header {
     justify-content: space-between;
-    align-items: center;   
-    
+    align-items: center;
+
 }
 
 .logo {
@@ -41,7 +40,7 @@ header {
     padding: 10px 50px;
 }
 
-.header__logo{
+.header__logo {
     cursor: pointer;
 }
 
@@ -56,7 +55,7 @@ div.cat__card {
     border-radius: 10px;
     gap: 10px;
     cursor: pointer;
-    }
+}
 
 .cat__img {
     height: 150px;
@@ -74,30 +73,32 @@ div.cat__card:hover {
     transition: 2s;
 }
 
-div.cat__card:hover>.cat__img {
+div.cat__card:hover > .cat__img {
     transition: 2s;
     opacity: 1;
 }
 
- .cat__rate {
+.cat__rate {
     display: flex;
-     justify-content: space-between;
-     padding: 0 15px;
-     
-  }
-  h3 {
-      font-size: 25px;
-      margin: 0;
-  }
- .cards {
-     display: grid;
-     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-     grid-template-rows: auto;
-     gap: 50px;
-     justify-content: center;
-     box-shadow: 0 0 5px 0 #878a87;
-     padding: 50px;
- }
+    justify-content: space-between;
+    padding: 0 15px;
+
+}
+
+h3 {
+    font-size: 25px;
+    margin: 0;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-rows: auto;
+    gap: 50px;
+    justify-content: center;
+    box-shadow: 0 0 5px 0 #878a87;
+    padding: 50px;
+}
 
 .footer__ {
     height: 50px;
@@ -115,11 +116,11 @@ div.cat__card:hover>.cat__img {
 }
 
 .popup__body {
-min-height: 100%;
-display: flex;
-align-items: center;
-justify-content: center;
-padding: 30px 10px;
+    min-height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 10px;
 }
 
 .popup__content {
@@ -128,31 +129,31 @@ padding: 30px 10px;
     max-width: 500px;
 }
 
-.modal{
+.modal {
     display: block;
     position: fixed;
     left: 0;
     top: 0;
     z-index: 10;
     width: 100%;
-    height: 100%; 
+    height: 100%;
     overflow: auto;
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(0, 0, 0, 0.4);
     opacity: 0;
     visibility: hidden;
-  }
+}
 
-.modal__wrap{
+.modal__wrap {
     width: 100%;
-    height: 100%; 
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-  }
+}
 
 .modal__window {
     width: 45%;
-    height: 300px;   
+    height: 300px;
     display: grid;
     background-color: #fefefe;
     margin: auto;
@@ -161,9 +162,9 @@ padding: 30px 10px;
     max-width: 1000px;
     border-radius: 10px;
     position: relative;
-  }
+}
 
-.modal__window_img{
+.modal__window_img {
     width: 50%;
     margin: 10px;
     padding-right: 20px;
@@ -177,14 +178,14 @@ padding: 30px 10px;
     width: 50%;
 }
 
-.modal__window_content{
+.modal__window_content {
     display: flex;
     justify-content: space-between;
 }
 
-.modal__close{
+.modal__close {
     position: absolute;
-    top:10px;
+    top: 10px;
     right: 10px;
     cursor: pointer;
     background-image: url(img/close.png);
@@ -195,9 +196,9 @@ padding: 30px 10px;
     height: 50px;
 }
 
-.modal__edit{
+.modal__edit {
     position: absolute;
-    top:10px;
+    top: 10px;
     right: 70px;
     cursor: pointer;
     background-image: url(img/edit.png);
@@ -208,9 +209,9 @@ padding: 30px 10px;
     height: 50px;
 }
 
-.modal__delete{
+.modal__delete {
     position: absolute;
-    top:10px;
+    top: 10px;
     right: 130px;
     cursor: pointer;
     background-image: url(img/delete.png);
@@ -230,7 +231,7 @@ padding: 30px 10px;
     overflow: hidden;
 }
 
-.modal__edit{
+.modal__edit {
     visibility: hidden;
     opacity: 0;
 }
