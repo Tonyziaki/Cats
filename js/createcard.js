@@ -77,7 +77,7 @@ function createCatCard(catData) {
     newH3.textContent = catData.name;
     let newP = clone.querySelector("p");
     for (let i = 1; i <= 10; i++){
-        if (i <= catData.rate) {
+        if (i <= catData?.rate) {
             newP = addRate(newP);
         } else {
             newP = addEmptyRate(newP);
