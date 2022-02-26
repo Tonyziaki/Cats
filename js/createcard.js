@@ -20,10 +20,62 @@ function loginUser() {
     }
 }
 
-function addNewCatCard() {
+async function addNewCatCard() {
+    const newId = await nextId();
+    console.log(newId);
     openModal(editModal);
 
-    
+    const formAdd = document.querySelector(".form__container");
+    const buttonDecline = document.querySelector(".changes_decline");
+    const buttonSave = document.querySelector(".changes_save");
+    const editFavourite = formAdd.querySelector("#favourite");
+    const editDescription = formAdd.querySelector("#description");
+    const inputs = formAdd.querySelectorAll(".input-form");
+    const editId = formAdd.querySelector("#id");
+    const newCat = {};
+
+    buttonDecline.addEventListener("click", cancelChanges);
+    buttonSave.addEventListener("click", saveChanges);
+
+    function cancelChanges() {
+        closeModal();
+    }
+    function saveChanges() {
+        inputs.forEach(input => {
+            newCat[input.name] = input.value;
+        })
+        newCat.favourite = editFavourite.checked;
+        newCat.description = editDescription.textContent
+        console.log(newCat);
+        newCat.id = newId;
+        console.log(newCat);
+        const catData = JSON.parse(localStorage.getItem('catsData'));
+        catData.push(newCat);
+        localStorage.setItem('catsData', JSON.stringify(catData));
+    }
+}
+
+async function nextId () {
+    const url = 'https://sb-cats.herokuapp.com/api/show';
+    let response = await fetch(url);
+    if (response.ok) {
+        let data = await response.json();
+        if (data.message === 'ok') {
+            return getMaxId(data.data)+5;
+        } else {
+            console.log(data.error);
+        }
+    } else {
+        console.log(response.error());
+    }
+}
+
+function getMaxId (data) {
+    const arr = [];
+    for (let val of Object.values(data)) {
+        arr.push(val.id);
+    }
+    return Math.max(...arr);
 }
 
 function addRate (element) {
