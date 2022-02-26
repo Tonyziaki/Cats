@@ -15,7 +15,7 @@ function handler(event) {
 
 function loginUser() {
     if (!Cookies.get('username')) {
-        window.location.replace('/auth.html');
+        window.location.replace('auth.html');
     }
 }
 
