@@ -1,4 +1,5 @@
 const modal = document.querySelector(".modal");
+const editModal = document.querySelector(".div_addCat");
 const modalWrap = document.querySelector(".modal__wrap");
 
 function openModal(modal) {
@@ -63,6 +64,8 @@ function createCatDetail(catData) {
     
     function editHandler() {
         console.log(`edit cat ${catData.id}`)
+        closeModal();
+        openModal(editModal);
     }
     function deleteHandler() {
         console.log(`delete cat ${catData.id}`)
