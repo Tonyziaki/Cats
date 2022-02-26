@@ -17,27 +17,26 @@ async function showCatCard(event) {
     const catClickedId = event.target.closest(".cat__card").dataset.id;
     const response = await getCatById(catClickedId);
     const catData = response.data;
-    // Добавить проверку, если вернуло undefined то надо обновить локальное хранилище
+//    const localCat = getCatFromStorage(catClickedId);
     createCatDetail(catData);
     openModal(modal);
 }
 
-function getCatFromStorage(catID) {
+function getCatFromStorage(catId) {
     const catData = JSON.parse(localStorage.getItem('catsData'));
-    for (let cat of catData) {
-        if ((cat?.id)) {
-            if (cat.id === catID) {
-                return cat;
-            }
-        }
+    let newCatData = Object.fromEntries(Object.entries(catData).filter(cat => cat[1].id == catId));
+    for (let key of Object.keys(newCatData)) {
+        return newCatData[key];
     }
 }
 
 function saveCatToStorage(catEdit) {
     const catData = JSON.parse(localStorage.getItem('catsData'));
-    for (let cat of catData) {
+    for (let cat of Object.values(catData)) {
+//        console.log(cat);
         if ((cat?.id)) {
-            if (cat.id === catEdit.id) {
+            if (cat.id == catEdit.id) {
+                console.log(cat);
                 cat.name = catEdit.name;
                 cat.favourite = catEdit.favourite;
                 cat.rate = catEdit.rate;
@@ -48,8 +47,13 @@ function saveCatToStorage(catEdit) {
             }
         }
     }
-    localStorage.clear();
     localStorage.setItem('catsData', JSON.stringify(catData));
+}
+
+function deleteCatFromStorage (catId) {
+    const catData = JSON.parse(localStorage.getItem('catsData'));
+    const newCatData = Object.fromEntries(Object.entries(catData).filter(cat => cat[1].id !== catId));
+    localStorage.setItem('catsData', JSON.stringify(newCatData));
 }
 
 function ageToStrinf(age) {
@@ -80,12 +84,12 @@ function createCatDetail(catData) {
     const deleteImage = modal.querySelector("#deleteimg");
     const editImage = modal.querySelector("#editimg");
     const modalH1 = modal.querySelector("h1");
-    modalH1.textContent = catData.name;
     const modalH2 = modal.querySelector("h2");
-    modalH2.textContent = ageToStrinf(catData.age);
     const modalP = modal.querySelector("p");
-    modalP.textContent = catData.description;
     const modalImg = modal.querySelector(".modal__window_img");
+    modalH1.textContent = catData.name;
+    modalH2.textContent = ageToStrinf(catData.age);
+    modalP.textContent = catData.description;
     modalImg.style.backgroundImage = `url("${catData.img_link}"), url('img/noimage.png')`;
 
     deleteImage.addEventListener("click", deleteHandler);
@@ -97,13 +101,15 @@ function createCatDetail(catData) {
         const catEdit = getCatFromStorage(catData.id);
 
         const formEdit = document.querySelector(".form__container");
-        const editId = formEdit.querySelector("#id");
-        const editName = formEdit.querySelector("#name");
+        const inputs = formEdit.querySelectorAll(".input-form");
         const editFavourite = formEdit.querySelector("#favourite");
+
+/*        const editId = formEdit.querySelector("#id");
+        const editName = formEdit.querySelector("#name");
         const editRate = formEdit.querySelector("#rate");
         const editAge = formEdit.querySelector("#age");
         const editUrl = formEdit.querySelector("#url");
-        const editDescription = formEdit.querySelector("#description");
+        const editDescription = formEdit.querySelector("#description");*/
 
         closeModal();
         fillEditModal();
@@ -114,22 +120,31 @@ function createCatDetail(catData) {
 
         function cancelChanges() {
             closeModal();
-            openModal(modal);
         }
 
         function saveChanges() {
-            catEdit.name = editName.value;
+            inputs.forEach(input => {
+                catEdit[input.name] = input.value;
+            })
+            catEdit.favourite = editFavourite.checked;
+            console.log(catEdit);
+/*            catEdit.name = editName.value;
             catEdit.favourite = editFavourite.checked;
             catEdit.rate = editRate.value;
             catEdit.age = editAge.value;
             catEdit.img_link = editUrl.value;
-            catEdit.description = editDescription.textContent;
+            catEdit.description = editDescription.textContent;*/
             saveCatToStorage(catEdit);
             closeModal();
-            openModal(modal);
         }
 
         function fillEditModal() {
+            inputs.forEach(input => {
+                input.value = catEdit[input.name];
+            })
+            editFavourite.checked = catEdit.favourite;
+
+/*
             editId.value = catEdit.id;
             editName.value = catEdit.name;
             editFavourite.checked = catEdit.favourite;
@@ -137,11 +152,16 @@ function createCatDetail(catData) {
             editAge.value = catEdit.age;
             editUrl.value = catEdit.img_link;
             editDescription.textContent = catEdit.description;
+*/
         }
     }
 
     function deleteHandler() {
-        console.log(`delete cat ${catData.id}`)
+        const approve = confirm("Вы действительно хотите удалить карточку?");
+        if (approve) {
+            deleteCatFromStorage(catData.id);
+            window.location.reload();
+        }
     }
 }
 

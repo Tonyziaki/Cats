@@ -66,7 +66,6 @@ function getAllCatsPromise() {
 
 function createCatCards(catData) {
     const cardSection = document.querySelector("#allcats");
-
     for (let key of Object.keys(catData)) {
         if ((catData[key]?.id)) {
             let catCard =createCatCard(catData[key]);
