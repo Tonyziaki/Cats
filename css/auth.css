@@ -1,0 +1,73 @@
+header {
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+}
+
+.page, .cat, .auth-heder__title  {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.page {
+    width: 100%;
+    height: 100%;
+    padding-top: 25px;
+}
+
+.page__content {
+
+    width: 35%;
+    box-shadow: 0 0 5px 0 #878a87;
+    border-radius: 10px;
+    background-color: #ffffff;
+}
+
+.auth-form__submit-btn {
+    margin: 20px 0px;
+}
+
+.auth-form {
+    padding: 10px 0px;
+    width: 90%;
+}
+
+.input__form{
+    height: 40px;
+}
+
+.form__group {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.form__container input, .cat input {
+    font-size: 16px;
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: 2px solid rgb(171, 171, 172);
+    border-radius: 10px;
+}
+
+button {
+    transition-duration: 0.4s;
+    background-color: rgb(235, 230, 230);
+    color: black;
+    border: 2px solid rgb(171, 171, 172);
+    padding: 10px 20px;
+    margin: 20px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 550;
+    cursor: pointer;
+}
+
+body {
+    font-family: 'Raleway', sans-serif;
+}

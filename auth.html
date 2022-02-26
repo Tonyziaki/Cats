@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Котики авторизация</title>
+    <link rel="stylesheet" href="cats/css/auth.css">
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+</head>
+
+<body class="page">
+    <div class="page__content">
+        <header class="header">
+            <h1 class="auth-heder__title">Бабуленькины котики</h1>
+            <h4 class="auth-heder__title">Для добавления, редактирования или удаления Вам необходимо авторизоваться</h4>
+        </header>
+        <main class="content">
+            <section class="cat">
+                <form name="auth-form" class="auth-form form__group">
+                    <input type="text" name="cats" class="input__form" placeholder="Введите ваше имя">
+                    <button type="submit" class="auth-form__submit-btn">Авторизация</button>
+                </form>
+            </section>
+        </main>
+    </div>
+    <script src="cats/js/auth-form.js"></script>
+</body>
+
+</html>

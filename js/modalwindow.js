@@ -17,6 +17,7 @@ async function showCatCard(event) {
     console.log(catClickedId);
     const response = await getCatById(catClickedId);
     const catData = response.data;
+    // Добавить проверку, если вернуло undefined то надо обновить локальное хранилище
     createCatDetail(catData);
     openModal(modal);
 }

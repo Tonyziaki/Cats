@@ -1,5 +1,6 @@
 const catImage = document.querySelector(".cat__img");
 const logo = document.querySelector(".header__logo");
+const login = document.querySelector(".header__cover");
 
 if (+localStorage.getItem('catsData') === 0) {
     getAllCatsPromise();
@@ -10,6 +11,12 @@ if (+localStorage.getItem('catsData') === 0) {
 function handler(event) {
     localStorage.clear();
     window.location.reload();
+}
+
+function loginUser() {
+    if (!Cookies.get('username')) {
+        window.location.replace('/auth.html');
+    }
 }
 
 function addRate (element) {
@@ -35,13 +42,13 @@ function getAllCats() {
     let xhr = new XMLHttpRequest();
     xhr.open('GET', 'https://sb-cats.herokuapp.com/api/show', true);
     xhr.send();
-    xhr.onload = function() {
+    xhr.onload = function () {
         if (xhr.status !== 200) {
             console.log(`Ошибка ${xhr.status}: ${xhr.statusText}`);
-        } else { 
+        } else {
             const catData = JSON.parse(xhr.response).data;
-            localStorage.setItem('catsData', JSON.stringify(catData));  
-            createCatCards(catData);  
+            localStorage.setItem('catsData', JSON.stringify(catData));
+            createCatCards(catData);
         }
     }
 }
@@ -86,7 +93,7 @@ function createCatCard(catData) {
             newP = addEmptyRate(newP);
         }
     }
-    
+
     return clone;
 }
 
@@ -95,3 +102,4 @@ function addCatCard(childElement, parentElement) {
 }
 
 logo.addEventListener("click", handler);
+login.addEventListener("click", loginUser);
