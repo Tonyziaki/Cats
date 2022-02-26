@@ -15,12 +15,41 @@ function closeModal() {
 
 async function showCatCard(event) {
     const catClickedId = event.target.closest(".cat__card").dataset.id;
-    console.log(catClickedId);
     const response = await getCatById(catClickedId);
     const catData = response.data;
     // Добавить проверку, если вернуло undefined то надо обновить локальное хранилище
     createCatDetail(catData);
     openModal(modal);
+}
+
+function getCatFromStorage(catID) {
+    const catData = JSON.parse(localStorage.getItem('catsData'));
+    for (let cat of catData) {
+        if ((cat?.id)) {
+            if (cat.id === catID) {
+                return cat;
+            }
+        }
+    }
+}
+
+function saveCatToStorage(catEdit) {
+    const catData = JSON.parse(localStorage.getItem('catsData'));
+    for (let cat of catData) {
+        if ((cat?.id)) {
+            if (cat.id === catEdit.id) {
+                cat.name = catEdit.name;
+                cat.favourite = catEdit.favourite;
+                cat.rate = catEdit.rate;
+                cat.age = catEdit.age;
+                cat.img_link = catEdit.img_link;
+                cat.description = catEdit.description;
+                break;
+            }
+        }
+    }
+    localStorage.clear();
+    localStorage.setItem('catsData', JSON.stringify(catData));
 }
 
 function ageToStrinf(age) {
@@ -61,12 +90,56 @@ function createCatDetail(catData) {
 
     deleteImage.addEventListener("click", deleteHandler);
     editImage.addEventListener("click", editHandler);
-    
+
     function editHandler() {
-        console.log(`edit cat ${catData.id}`)
+        const buttonDecline = document.querySelector(".changes_decline");
+        const buttonSave = document.querySelector(".changes_save");
+        const catEdit = getCatFromStorage(catData.id);
+
+        const formEdit = document.querySelector(".form__container");
+        const editId = formEdit.querySelector("#id");
+        const editName = formEdit.querySelector("#name");
+        const editFavourite = formEdit.querySelector("#favourite");
+        const editRate = formEdit.querySelector("#rate");
+        const editAge = formEdit.querySelector("#age");
+        const editUrl = formEdit.querySelector("#url");
+        const editDescription = formEdit.querySelector("#description");
+
         closeModal();
+        fillEditModal();
         openModal(editModal);
+
+        buttonDecline.addEventListener("click", cancelChanges);
+        buttonSave.addEventListener("click", saveChanges);
+
+        function cancelChanges() {
+            closeModal();
+            openModal(modal);
+        }
+
+        function saveChanges() {
+            catEdit.name = editName.value;
+            catEdit.favourite = editFavourite.checked;
+            catEdit.rate = editRate.value;
+            catEdit.age = editAge.value;
+            catEdit.img_link = editUrl.value;
+            catEdit.description = editDescription.textContent;
+            saveCatToStorage(catEdit);
+            closeModal();
+            openModal(modal);
+        }
+
+        function fillEditModal() {
+            editId.value = catEdit.id;
+            editName.value = catEdit.name;
+            editFavourite.checked = catEdit.favourite;
+            editRate.value = catEdit.rate;
+            editAge.value = catEdit.age;
+            editUrl.value = catEdit.img_link;
+            editDescription.textContent = catEdit.description;
+        }
     }
+
     function deleteHandler() {
         console.log(`delete cat ${catData.id}`)
     }
