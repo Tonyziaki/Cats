@@ -103,13 +103,14 @@ function createCatDetail(catData) {
         const formEdit = document.querySelector(".form__container");
         const inputs = formEdit.querySelectorAll(".input-form");
         const editFavourite = formEdit.querySelector("#favourite");
+        const editDescription = formEdit.querySelector("#description")
 
 /*        const editId = formEdit.querySelector("#id");
         const editName = formEdit.querySelector("#name");
         const editRate = formEdit.querySelector("#rate");
         const editAge = formEdit.querySelector("#age");
         const editUrl = formEdit.querySelector("#url");
-        const editDescription = formEdit.querySelector("#description");*/
+;*/
 
         closeModal();
         fillEditModal();
@@ -127,6 +128,7 @@ function createCatDetail(catData) {
                 catEdit[input.name] = input.value;
             })
             catEdit.favourite = editFavourite.checked;
+            catEdit.description = editDescription.textContent
             console.log(catEdit);
 /*            catEdit.name = editName.value;
             catEdit.favourite = editFavourite.checked;
@@ -143,6 +145,7 @@ function createCatDetail(catData) {
                 input.value = catEdit[input.name];
             })
             editFavourite.checked = catEdit.favourite;
+            editDescription.textContent = catEdit.description;
 
 /*
             editId.value = catEdit.id;

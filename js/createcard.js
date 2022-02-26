@@ -1,6 +1,7 @@
 const catImage = document.querySelector(".cat__img");
 const logo = document.querySelector(".header__logo");
 const login = document.querySelector(".header__cover");
+const addNewCat = document.querySelector(".add_newCard");
 
 if (+localStorage.getItem('catsData') === 0) {
     getAllCatsPromise();
@@ -17,6 +18,12 @@ function loginUser() {
     if (!Cookies.get('username')) {
         window.location.replace('auth.html');
     }
+}
+
+function addNewCatCard() {
+    openModal(editModal);
+
+    
 }
 
 function addRate (element) {
@@ -102,3 +109,4 @@ function addCatCard(childElement, parentElement) {
 
 logo.addEventListener("click", handler);
 login.addEventListener("click", loginUser);
+addNewCat.addEventListener("click", addNewCatCard)

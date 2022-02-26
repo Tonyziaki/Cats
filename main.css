@@ -395,4 +395,11 @@ button {
 .input__form{
     height: 40px;
 }
-
+.add_newCard{
+    width: 50px;
+    height: 50px;
+    background-image: url(img/add.png);
+    background-position: center;
+    background-size: cover;
+    cursor: pointer;
+}
