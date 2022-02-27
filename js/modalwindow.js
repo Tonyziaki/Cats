@@ -128,7 +128,7 @@ function createCatDetail(catData) {
                 catEdit[input.name] = input.value;
             })
             catEdit.favourite = editFavourite.checked;
-            catEdit.description = editDescription.textContent
+//            catEdit.description = editDescription.textContent
             console.log(catEdit);
 /*            catEdit.name = editName.value;
             catEdit.favourite = editFavourite.checked;
@@ -145,7 +145,7 @@ function createCatDetail(catData) {
                 input.value = catEdit[input.name];
             })
             editFavourite.checked = catEdit.favourite;
-            editDescription.textContent = catEdit.description;
+//            editDescription.textContent = catEdit.description;
 
 /*
             editId.value = catEdit.id;
@@ -159,10 +159,17 @@ function createCatDetail(catData) {
         }
     }
 
-    function deleteHandler() {
+    async function deleteHandler() {
         const approve = confirm("Вы действительно хотите удалить карточку?");
         if (approve) {
             deleteCatFromStorage(catData.id);
+
+            let response = await fetch(`https://sb-cats.herokuapp.com/api/delete/${catData.id}`,{
+                method: 'DELETE'
+            });
+            let result = await response.json();
+            console.log(result);
+            closeModal();
             window.location.reload();
         }
     }

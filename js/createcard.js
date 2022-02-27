@@ -40,18 +40,29 @@ async function addNewCatCard() {
     function cancelChanges() {
         closeModal();
     }
-    function saveChanges() {
+    async function saveChanges(e) {
+        e.preventDefault();
         inputs.forEach(input => {
             newCat[input.name] = input.value;
         })
         newCat.favourite = editFavourite.checked;
-        newCat.description = editDescription.textContent
-        console.log(newCat);
         newCat.id = newId;
         console.log(newCat);
         const catData = JSON.parse(localStorage.getItem('catsData'));
-        catData.push(newCat);
-        localStorage.setItem('catsData', JSON.stringify(catData));
+        console.log(catData);
+//        let local1 = Object.assign(catData, {[newCat.id]:newCat})
+        localStorage.setItem('catsData', JSON.stringify(Object.assign(catData, {[newCat.id]:newCat})));
+
+        let response = await fetch('https://sb-cats.herokuapp.com/api/add ',{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newCat)
+        });
+        let result = await response.json();
+        console.log(result);
+        closeModal();
     }
 }
 
@@ -73,7 +84,9 @@ async function nextId () {
 function getMaxId (data) {
     const arr = [];
     for (let val of Object.values(data)) {
-        arr.push(val.id);
+        if (val?.id){
+            arr.push(val.id);
+        }
     }
     return Math.max(...arr);
 }
