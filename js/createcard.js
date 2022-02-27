@@ -47,10 +47,7 @@ async function addNewCatCard() {
         })
         newCat.favourite = editFavourite.checked;
         newCat.id = newId;
-        console.log(newCat);
         const catData = JSON.parse(localStorage.getItem('catsData'));
-        console.log(catData);
-//        let local1 = Object.assign(catData, {[newCat.id]:newCat})
         localStorage.setItem('catsData', JSON.stringify(Object.assign(catData, {[newCat.id]:newCat})));
 
         let response = await fetch('https://sb-cats.herokuapp.com/api/add ',{
@@ -61,7 +58,6 @@ async function addNewCatCard() {
             body: JSON.stringify(newCat)
         });
         let result = await response.json();
-        console.log(result);
         closeModal();
     }
 }

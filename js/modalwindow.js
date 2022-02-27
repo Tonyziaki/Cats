@@ -33,7 +33,6 @@ function getCatFromStorage(catId) {
 function saveCatToStorage(catEdit) {
     const catData = JSON.parse(localStorage.getItem('catsData'));
     for (let cat of Object.values(catData)) {
-//        console.log(cat);
         if ((cat?.id)) {
             if (cat.id == catEdit.id) {
                 console.log(cat);
@@ -52,7 +51,9 @@ function saveCatToStorage(catEdit) {
 
 function deleteCatFromStorage (catId) {
     const catData = JSON.parse(localStorage.getItem('catsData'));
+    console.log(catId);
     const newCatData = Object.fromEntries(Object.entries(catData).filter(cat => cat[1].id !== catId));
+    console.log(newCatData);
     localStorage.setItem('catsData', JSON.stringify(newCatData));
 }
 
@@ -105,13 +106,6 @@ function createCatDetail(catData) {
         const editFavourite = formEdit.querySelector("#favourite");
         const editDescription = formEdit.querySelector("#description")
 
-/*        const editId = formEdit.querySelector("#id");
-        const editName = formEdit.querySelector("#name");
-        const editRate = formEdit.querySelector("#rate");
-        const editAge = formEdit.querySelector("#age");
-        const editUrl = formEdit.querySelector("#url");
-;*/
-
         closeModal();
         fillEditModal();
         openModal(editModal);
@@ -123,20 +117,23 @@ function createCatDetail(catData) {
             closeModal();
         }
 
-        function saveChanges() {
+        async function saveChanges(e) {
+            e.preventDefault();
             inputs.forEach(input => {
                 catEdit[input.name] = input.value;
             })
             catEdit.favourite = editFavourite.checked;
-//            catEdit.description = editDescription.textContent
-            console.log(catEdit);
-/*            catEdit.name = editName.value;
-            catEdit.favourite = editFavourite.checked;
-            catEdit.rate = editRate.value;
-            catEdit.age = editAge.value;
-            catEdit.img_link = editUrl.value;
-            catEdit.description = editDescription.textContent;*/
             saveCatToStorage(catEdit);
+
+            let response = await fetch(`https://sb-cats.herokuapp.com/api/update/${catData.id}`,{
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(catEdit)
+            });
+            let result = await response.json();
+
             closeModal();
         }
 
@@ -145,17 +142,6 @@ function createCatDetail(catData) {
                 input.value = catEdit[input.name];
             })
             editFavourite.checked = catEdit.favourite;
-//            editDescription.textContent = catEdit.description;
-
-/*
-            editId.value = catEdit.id;
-            editName.value = catEdit.name;
-            editFavourite.checked = catEdit.favourite;
-            editRate.value = catEdit.rate;
-            editAge.value = catEdit.age;
-            editUrl.value = catEdit.img_link;
-            editDescription.textContent = catEdit.description;
-*/
         }
     }
 
